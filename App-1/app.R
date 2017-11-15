@@ -1,32 +1,38 @@
 library(shiny)
 
-# Define UI
 ui <- fluidPage(
-  # Title ----
-  title = "hell",
-  titlePanel("title panel"),
-  
+  title = "Test for shiny App",
+  titlePanel("My Shiny App"),
   sidebarLayout(
-    sidebarPanel = sidebarPanel(),
-    mainPanel = mainPanel(
-      h1("First level title"),
-      h2("Second level title"),
-      h3("Third level title"),
-      h4("Fourth level title"),
-      h5("Fifth level title"),
-      h6("Sixth level title")
+    sidebarPanel = sidebarPanel(
+      h1("Installation"),
+      p("Shiny is available on CRAN, so you can install it in the usual way from your R console:"),
+      code("install.packages(\"shiny\")"),
+      br(),
+      img(src = "imgs/rstudio.png"),
+      p("Shiny is a product of",span("RStudio", style="color:blue"))
     ),
-    position = "right"
-  ) 
+    mainPanel(
+      h1("Introducing Shiny"),
+      p("Shiny is a new package from RStudio that makes it",
+        em("incredibly"), 
+        "easy to build interactive web application with R."),
+      br(),
+      p("For an introction and live examples, visit the",
+        a(href = "http://shiny.rstudio.com/tutorial/written-tutorial/lesson2/", "Shiny homepage.")),
+    br(),
+    h2("Features"),
+    p("- Build useful web applications with only a few lines of code-no JavaScript required."),
+    p("- Shiny applications are automatically 'live' in the same way that ",
+      strong("spreadsheets"),
+      " are live. Outputs change instantly as users modify inputs, without requiring a reload of the browser.")
+  )
+)
 )
 
-
-# Define server logic -----------------------------------------------------
-
-
-
 server <- function(input, output){
-
+ 
+  
 }
 
 shinyApp(ui = ui, server = server)
