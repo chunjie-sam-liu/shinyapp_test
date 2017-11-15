@@ -66,4 +66,3 @@ server <- function(input, output) {
 
 # Run the app
 shinyApp(ui, server)
-runGitHub("chunjie-sam-liu/shinyapp-test")
