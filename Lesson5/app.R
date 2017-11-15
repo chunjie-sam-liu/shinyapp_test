@@ -58,6 +58,7 @@ shinyApp(ui, server)
 
 library(shiny)
 runGitHub("chunjie-sam-liu/shinyapp-test")
+shiny::runGitHub("shiny-examples", "rstudio", subdir = "001-hello")
 
 # Gist was block by the wall ----------------------------------------------
 runGist("adcd899afbaccef760818b8d016f85e2")
