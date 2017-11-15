@@ -50,3 +50,21 @@ server <- function(input, output) {
 
 # Run app ----
 shinyApp(ui, server)
+
+# Shinyapps.io deployment -------------------------------------------------
+
+# Test for sharing through github -----------------------------------------
+
+
+library(shiny)
+runGitHub("chunjie-sam-liu/shinyapp-test")
+
+# Gist was block by the wall ----------------------------------------------
+runGist("adcd899afbaccef760818b8d016f85e2")
+
+
+# Deployment on the shinyapps.io ------------------------------------------
+rsconnect::setAccountInfo(name='chunjie-sam-liu',
+                          token='<TOKEN>',
+                          secret='<SECRET>')
+rsconnect::deployApp('path/to/your/app')

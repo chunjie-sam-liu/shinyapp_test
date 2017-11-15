@@ -1,0 +1,10 @@
+name: stockvis
+title:
+username:
+account: chunjie-sam-liu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 235677
+bundleId: 1076204
+url: https://chunjie-sam-liu.shinyapps.io/stockvis/
+when: 1510726686.93933
