@@ -1,0 +1,12 @@
+name: interactive_document
+title: interactive_document
+username:
+account: chunjie-sam-liu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 236023
+bundleId: 1078016
+url: https://chunjie-sam-liu.shinyapps.io/interactive_document/
+when: 1510799874.67739
+asMultiple: FALSE
+asStatic: FALSE
