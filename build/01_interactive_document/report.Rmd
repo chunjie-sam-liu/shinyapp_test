@@ -1,0 +1,20 @@
+---
+title: "Dynamic report"
+author: "C.J. Liu"
+date: "11/17/2017"
+params:
+  n: NA
+output: word_document
+---
+
+## The `params` object is available in the document.
+```{r}
+params$n
+```
+
+
+A plot of `params$n` random points.
+```{r}
+plot(rnorm(params$n), rnorm(params$n))
+```
+

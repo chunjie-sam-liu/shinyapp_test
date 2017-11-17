@@ -6,10 +6,20 @@ shinyApp(
     downloadButton(outputId = "report", label = "Generate report")
   ),
   server = function(input, output) {
-    output$report <- downloadHandler(filename = "report.html", content = fucntion(file){
-      tempReport <- file.path(tempdir(), "report.Rmd")
-      file.copy("report.Rmd", tempReport, overwrite = T)
-    })
+    output$report <- downloadHandler(
+      filename = "report.doc", 
+      content = function(file){
+        tempReport <- file.path(tempdir(), "report.Rmd")
+        file.copy("report.Rmd", tempReport, overwrite = T)
+        params <- list(n = input$slider)
+        
+        rmarkdown::render(
+          input = tempReport, 
+          output_file = file, 
+          params = params, 
+          envir = new.env(parent = globalenv()))
+        }
+      )
   }
 )
 
