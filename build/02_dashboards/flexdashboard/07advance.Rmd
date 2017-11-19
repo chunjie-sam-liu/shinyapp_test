@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Columns {.sidebar}
+---
+```{r}
+fillCol(height = 600, flex = c(NA, 1), 
+        inputPanel(
+          selectInput(inputId = "region", label = "Region:", choices = colnames(WroldPhones))
+        ),
+        plotOutput("phonePlot", height = "100%"))
+
+output$phonePlot <- renderPlot({
+  barplot(WorldPhones[, input$region] * 1000, ylab = "Number of Telephones", xlab = "Year")
+})
+```
+
