@@ -1,0 +1,73 @@
+---
+title: "Multiple Pages"
+output: 
+  flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Page 1 {data-navmenu="Menu A" data-icon="fa-list"}
+===================
+You can link to a dashboard page with either of the following syntaxes:
+
+[Page 2]
+
+[Page Two](#page-2)
+
+The second syntax is used when you want a custom name for the link 
+(rather than just using the page title).
+
+### Chart 1
+```{r}
+
+```
+
+### Chart 2
+```{r}
+
+```
+
+Page 2 {data-navmenu="Menu A" data-orientation=rows data-icon="fa-github"}
+=====================
+
+[Page 1] hello world
+[Page One](#page-1)
+
+### Chart 3 {data-icon="fa-twitter"}
+```{r}
+
+```
+
+### Chart 4
+```{r}
+
+```
+
+Page 3 {data-navmenu="Menu B"}
+=====================
+### Chart 5
+```{r}
+
+```
+
+### Chart 6
+```{r}
+
+```
+
+
+
+
+Page 4 {data-navmenu="Menu B"}
+=====================
+### Chart 7
+```{r}
+
+```
+
+### Chart 8
+```{r}
+
+```

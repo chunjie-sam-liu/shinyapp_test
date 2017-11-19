@@ -1,0 +1,69 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+```
+
+Row {.tabset }
+---------------------------------
+
+
+### Chart B
+
+```{r, fig.width=5, fig.height=5}
+plot(pressure)
+```
+
+### Chart C
+
+```{r, fig.width=5, fig.height=5}
+plot(airmiles)
+```
+
+
+### Using knitr::kable
+```{r}
+knitr::kable(mtcars)
+```
+
+### Shiny based dashboards, shiny::renderTable({})
+```{r}
+shiny::renderTable({head(mtcars, n = 10)})
+```
+
+### Data Table
+`DT` package can display R matrices or data frames as interactive HTML tables that support filtering, pagination, and sorting.
+```{r}
+DT::datatable(mtcars, options = list(bPaginate = FALSE))
+```
+
+
+### DT for shiny
+```{r}
+DT::renderDataTable({
+  data <- head(mtcars, n = input$maxrows)
+  DT::datatable(data, options = list(bPagenate = FALSE))
+})
+```
+
+
+Row
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r, fig.width=10, fig.height=7}
+plot(cars)
+```
+
+
+
+
+

@@ -1,0 +1,44 @@
+---
+title: "Value box"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Row {.tabset}
+-----------------------------------------------------------------------
+
+### Articles per Day
+
+```{r}
+articles <- 10
+valueBox(articles, icon = "fa-pencil")
+```
+
+### Comments per Day
+```{r}
+comments <- 10
+valueBox(comments, icon = "fa-comments")
+
+
+```
+
+### Spams
+```{r}
+spam <- 20
+valueBox(spam, icon = "fa-trash", color = ifelse(spam >10, "warning", "primary"), href = "#details")
+```
+
+### Articles per Day
+```{r}
+renderValueBox({
+  articles <- computeArticles(input$types)
+  valueBox(articles, icon = "fa-pencil", color = ifelse(articles>100, "success", "info"))
+})
+```
+

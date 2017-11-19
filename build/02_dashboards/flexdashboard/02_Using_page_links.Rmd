@@ -1,0 +1,22 @@
+---
+title: "Page Links"
+output: 
+  flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+Sidebar {.sidebar}
+=====================================
+
+Link to [Page 3](#page-3)
+
+
+Page 2 {data-icon="fa-list"}
+=====================================  
+cj
+
+Page 3 {.hidden}
+=====================================
+hello world

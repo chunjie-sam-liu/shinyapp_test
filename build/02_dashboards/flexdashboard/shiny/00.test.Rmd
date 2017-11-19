@@ -1,0 +1,21 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Column
+---
+
+```{r}
+sliderInput(inputId = "bins", label = "Number of bins:", min = 1, max = 50, value = 30)
+renderPlot({
+  hist(faithful[,2], breaks = input$bins)
+})
+```
+

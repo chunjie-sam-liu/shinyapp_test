@@ -7,10 +7,10 @@ shinyApp(
   ),
   server = function(input, output) {
     output$report <- downloadHandler(
-      filename = "report.doc", 
+      filename = "report.html", 
       content = function(file){
         tempReport <- file.path(tempdir(), "report.Rmd")
-        file.copy("report.Rmd", tempReport, overwrite = T)
+        file.copy("02_report.Rmd", tempReport, overwrite = T)
         params <- list(n = input$slider)
         
         rmarkdown::render(

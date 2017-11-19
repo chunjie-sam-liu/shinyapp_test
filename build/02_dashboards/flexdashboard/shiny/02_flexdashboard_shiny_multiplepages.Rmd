@@ -1,0 +1,35 @@
+---
+title: "Shiny for Multiple Pages"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Siderbar {.sidebar}
+===
+```{r}
+
+```
+
+Page 1
+===
+
+### Chart 1
+```{r}
+
+```
+
+Page 2
+===
+
+### Chart 2
+
+```{r}
+
+```
+

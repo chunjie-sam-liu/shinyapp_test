@@ -1,0 +1,37 @@
+---
+title: "Appearance"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: simplex
+
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+Analysis {.storyboard}
+===
+### Frame 1
+```{r}
+
+```
+
+***
+
+Some commentary about Frame 1.
+
+### Frame 2 {data-commentary-width=400}
+
+***
+
+help
+
+```{r}
+
+```
+
+Details
+===
+
+Column
+---

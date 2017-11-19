@@ -1,0 +1,31 @@
+---
+title: "Single Column (Scrolling)"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Row
+--------------------------
+### Chart 1
+```{r}
+
+```
+
+Row
+---------------------------
+### Chart 2
+```{r}
+
+```
+
+### Chart 3
+```{r}
+
+```
+
