@@ -1,0 +1,8 @@
+---
+title: "Shiny extension"
+author: "C.J. Liu"
+date: "11/20/2017"
+output: html_document
+---
+
+Take time to play the shiny extension, it's very important
