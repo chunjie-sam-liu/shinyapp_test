@@ -17,3 +17,4 @@ In master, change the README to compare the feature1 branch conflict.
 Feature1 branch
 >>>>>>> feature1
 
+Use --no-ff to git merge again
