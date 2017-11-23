@@ -6,3 +6,5 @@ git branches
 
 
 Creating a new branch is quick.
+
+Use --no-ff to git merge
