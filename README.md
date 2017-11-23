@@ -18,3 +18,7 @@ Feature1 branch
 >>>>>>> feature1
 
 Use --no-ff to git merge again
+
+
+
+Git is a free software
