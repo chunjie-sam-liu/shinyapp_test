@@ -11,5 +11,5 @@ Use --no-ff to git merge
 
 New test branch
 
-
+In master, change the README to compare the feature1 branch conflict.
 
