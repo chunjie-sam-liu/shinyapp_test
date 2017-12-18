@@ -6,9 +6,7 @@ ui <- fluidPage(
   textInput("text", "Text")
 )
 server <- function(input, output) {
-  observeEvent(input$button, {
-    toggle("text")
-  })
+  observeEvent(input$button, {toggle("text")})
 }
 
 shinyApp(ui, server)
