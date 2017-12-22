@@ -39,3 +39,21 @@ shinyApp(
     observeEvent(input$btn, {js$backgroundCol(input$selector, input$col)})
   }
 )
+
+
+
+shinyApp(
+  ui = fluidPage(
+    useShinyjs(),  # Set up shinyjs
+    p(id = "date", "Click me to see the date"),
+    p(id = "coords", "Click me to see the mouse coordinates"),
+    p(id = "disappear", "Move your mouse here to make the text below disappear"),
+    p(id = "text", "Hello")
+  ),
+  server = function(input, output) {
+    onclick("date", alert(date()))
+    onclick("coords", function(event) { alert(event) })
+    onevent("mouseenter", "disappear", hide("text"))
+    onevent("mouseleave", "disappear", show("text"))
+  }
+)
