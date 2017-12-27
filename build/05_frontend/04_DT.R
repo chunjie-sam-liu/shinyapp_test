@@ -8,11 +8,30 @@ ui <- basicPage(
 
 server <- function(input, output) {
   output$mytable <- DT::renderDataTable({
-    mtcars
+    tibble::rownames_to_column(mtcars) -> .d
+    DT::datatable(
+      data = .d, 
+      filter = "top",
+      style = 'bootstrap',
+      class = 'table-bordered table-condensed',
+      options = list(
+        pageLength = 5, 
+        autoWidth = TRUE, 
+        order = list(list(2, "asc"), list(4, "desc")),
+        initComplete = DT::JS(
+          "function(settings, json) {",
+          "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+          "}")
+        )
+      ) %>% DT::formatRound(names(.d[-1]), 2)
   })
 }
 shinyApp(ui = ui, server = server)
 
+# DT options
+# https://rstudio.github.io/DT/functions.html
+# DT bootstrape
+# http://rstudio.github.io/DT/005-bootstrap.html
 
 library(ggplot2)  # for the diamonds dataset
 
