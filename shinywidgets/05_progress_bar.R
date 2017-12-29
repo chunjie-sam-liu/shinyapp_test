@@ -20,3 +20,23 @@ server <- function(input, output, session){
 }
 
 shinyApp(ui = ui, server = server)
+
+
+
+
+library("shiny")
+ library("shinyWidgets")
+
+ ui <- fluidPage(
+   tags$b("Default"), br(),
+   progressBar(id = "pb1", value = 50),
+   sliderInput(inputId = "up1", label = "Update", min = 0, max = 100, value = 50)
+ )
+
+ server <- function(input, output, session) {
+   observeEvent(input$up1, {
+     updateProgressBar(session = session, id = "pb1", value = input$up1)
+   })
+ }
+
+ shinyApp(ui = ui, server = server)
