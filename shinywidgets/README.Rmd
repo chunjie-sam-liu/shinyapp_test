@@ -1,0 +1,3 @@
+# Using shinyWidgets
+
+From dreamRs [GitHub](https://github.com/dreamRs/shinyWidgets) and [pkgdown](https://dreamrs.github.io/shinyWidgets/index.html)
