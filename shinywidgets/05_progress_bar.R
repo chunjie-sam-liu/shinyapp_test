@@ -25,7 +25,7 @@ shinyApp(ui = ui, server = server)
 
 
 library("shiny")
- library("shinyWidgets")
+library("shinyWidgets")
 
  ui <- fluidPage(
    tags$b("Default"), br(),
@@ -39,4 +39,31 @@ library("shiny")
    })
  }
 
- shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server = server)
+
+
+
+# Progress bar status update ----------------------------------------------
+
+ui <- fluidPage(
+  tags$b("Default"), br(),
+  progressBar(id = "pb7", value = 0, striped = TRUE,  status = "warning"),
+  sliderInput(inputId = "up7", label = "Update", min = 0, max = 100, value = 0)
+)
+
+server <- function(input, output, session) {
+  
+  observeEvent(input$up7, {
+    if (input$up7 < 33 ) {
+      status <-  "danger"
+    } else if (input$up7 >= 33 & input$up7 < 67) {
+      status <-  "warning"
+    } else {
+      status <- "success"
+    }
+    updateProgressBar(session = session, id = "pb7", value = input$up7, status = status)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
