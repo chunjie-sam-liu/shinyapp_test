@@ -9,9 +9,7 @@ shinyApp(
           "divided by", textInput("num2", NULL, value = 20),
           "equals", textOutput("exampleOutput")
         ),
-        mainPanel(
-          bsAlert("alert")
-        )
+        mainPanel(bsAlert("alert"))
       )
     ),
   server =
