@@ -30,3 +30,5 @@ Huffyphenix add
 new ff add
 
 ff add again
+
+Test GitHub Connection.
