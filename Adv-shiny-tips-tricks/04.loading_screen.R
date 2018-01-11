@@ -138,3 +138,29 @@ shinyApp(ui = ui, server = server)
 
 
 
+# use shinyjs init for loading screen
+
+library(shiny)
+library(shinydashboard)
+library(shinyjs)
+jscode <- "shinyjs.init = function() {
+  $(document).keypress(function(e) { alert('Key pressed: ' + e.which); });
+}"
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody(
+    useShinyjs(), extendShinyjs(text = jscode),
+    inlineCSS(appCSS),
+    actionButton("button", "Click me"),
+    div(id = "hello", "Hello!")
+  )
+)
+
+server <- function(input, output) {
+  observeEvent(input$button, {
+    toggle("hello")
+  })
+}
+
+shinyApp(ui, server)
