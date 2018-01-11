@@ -15,6 +15,15 @@ color: #FFFFFF;
 }
 "
 
+ui <- dashboardPage(
+  dashboardHeader(),
+  dashboardSidebar(),
+  dashboardBody(
+    actionButton("button", "Click me"),
+    div(id = "hello", "Hello!")
+  )
+)
+
 ui <- fluidPage(
   useShinyjs(),
   inlineCSS(appCSS),
@@ -139,7 +148,19 @@ shinyApp(ui = ui, server = server)
 
 
 # use shinyjs init for loading screen
-
+appCSS <- "
+#loading-content {
+position: absolute;
+background: #000000;
+opacity: 0.9;
+z-index: 100;
+left: 0;
+right: 0;
+height: 100%;
+text-align: center;
+color: #FFFFFF;
+}
+"
 library(shiny)
 library(shinydashboard)
 library(shinyjs)
@@ -159,7 +180,81 @@ ui <- dashboardPage(
 
 server <- function(input, output) {
   observeEvent(input$button, {
+    Sys.sleep(2)
     toggle("hello")
+  })
+}
+
+shinyApp(ui, server)
+
+
+# Loading screen for dashboad ---------------------------------------------
+
+library(shinydashboard)
+
+dsbh <- dashboardHeader(title = "Basic dashboard")
+dsbs <- dashboardSidebar(
+  sidebarMenu(
+    menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+    menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+  )
+)
+dsbb <- dashboardBody(
+  tabItems(
+    # First tab content
+    tabItem(tabName = "dashboard",
+            fluidRow(
+              box(plotOutput("plot1", height = 250)),
+              
+              box(
+                title = "Controls",
+                sliderInput("slider", "Number of observations:", 1, 100, 50)
+              )
+            )
+    ),
+    
+    # Second tab content
+    tabItem(tabName = "widgets",
+            h2("Widgets tab content")
+    )
+  )
+)
+dsbp <- dashboardPage(header = dsbh, sidebar = dsbs, body = dsbb)
+
+
+
+ui <- fluidPage(
+  useShinyjs(),
+  inlineCSS(appCSS),
+  
+  # Loading message
+  div(
+    id = "loading-content",
+    h2("Loading...")
+  ),
+  
+  # The main app code goes here
+  hidden(
+    div(
+      id = "app-content",
+      dsbp
+    )
+  )
+)
+
+server <- function(input, output) {
+  Sys.sleep(2)
+  
+  # Hide the loading message when the rest of the server function has executed
+  hide(id = "loading-content", anim = TRUE, animType = "fade")    
+  show("app-content")
+  
+  set.seed(122)
+  histdata <- rnorm(500)
+  
+  output$plot1 <- renderPlot({
+    data <- histdata[seq_len(input$slider)]
+    hist(data)
   })
 }
 
