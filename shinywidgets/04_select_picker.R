@@ -38,7 +38,7 @@ library("shinyWidgets")
 ui <- fluidPage(
   multiInput(
     inputId = "id", label = "Fruits :",
-    choices = c("Banana", "Blueberry", "Cherry", "Coconut", "Grapefruit",
+    choices = c("Banana" = "b", "Blueberry" = "bb", "Cherry", "Coconut", "Grapefruit",
                 "Kiwi", "Lemon", "Lime", "Mango", "Orange", "Papaya"),
     selected = "Banana", width = "350px"
   ),
@@ -49,7 +49,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$res <- renderPrint({input$id})
   observeEvent(input$up, {
-    choices <- c("Banana", "Blueberry", "Cherry", "Coconut", "Grapefruit",
+    choices <- c("Banana" = "b", "Blueberry" = "bb", "Cherry", "Coconut", "Grapefruit",
                  "Kiwi", "Lemon", "Lime", "Mango", "Orange", "Papaya")
     if (input$up == "none") {
       shinyWidgets:::updateMultiInput(session = session, inputId = "id", selected = character(0))
@@ -62,3 +62,12 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui = ui, server = server)
+
+ui <- fluidPage(
+  switchInput(inputId = "somevalue", offStatus = "danger"),
+  verbatimTextOutput("value")
+)
+server <- function(input, output) {
+  output$value <- renderPrint({ input$somevalue })
+}
+shinyApp(ui, server)
