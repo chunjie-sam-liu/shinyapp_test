@@ -34,29 +34,44 @@ shinyApp(ui = ui, server = server)
 
 library("shiny")
 library("shinyWidgets")
+jsCode <- '
+shinyjs.switch = function(){
+  
+  setTimeout(function(){ 
+  console.log($("#id").val()); 
+  $("#id").change();
+}, 100);
 
+};
+'
 ui <- fluidPage(
+  shinyjs::useShinyjs(),
+  extendShinyjs(text = jsCode),
   multiInput(
     inputId = "id", label = "Fruits :",
-    choices = c("Banana" = "b", "Blueberry" = "bb", "Cherry", "Coconut", "Grapefruit",
+    choices = c("Banana", "Blueberry", "Cherry", "Coconut", "Grapefruit",
                 "Kiwi", "Lemon", "Lime", "Mango", "Orange", "Papaya"),
-    selected = "Banana", width = "350px"
+    selected = NULL, width = "350px"
   ),
-  verbatimTextOutput(outputId = "res"),
-  radioButtons(inputId = "up", label = "Update", choices = c("none", "random", "all"))
+  switchInput(
+    inputId = "up", label = "Analysis", value = FALSE,
+    onLabel = "All", offLabel = "None", size = "large", offStatus = "danger"
+  ),
+  verbatimTextOutput(outputId = "res")
 )
 
 server <- function(input, output, session) {
   output$res <- renderPrint({input$id})
   observeEvent(input$up, {
-    choices <- c("Banana" = "b", "Blueberry" = "bb", "Cherry", "Coconut", "Grapefruit",
+    choices <- c("Banana", "Blueberry", "Cherry", "Coconut", "Grapefruit",
                  "Kiwi", "Lemon", "Lime", "Mango", "Orange", "Papaya")
-    if (input$up == "none") {
+    
+    if (input$up == FALSE) {
       shinyWidgets:::updateMultiInput(session = session, inputId = "id", selected = character(0))
-    } else if (input$up == "random") {
-      shinyWidgets:::updateMultiInput(session = session, inputId = "id", selected = sample(choices, sample(1:2)))
-    } else if (input$up == "all") {
+    }
+    if (input$up == TRUE) {
       shinyWidgets:::updateMultiInput(session = session, inputId = "id", selected = choices)
+      shinyjs::js$switch()
     }
   }, ignoreInit = TRUE)
 }
@@ -71,3 +86,6 @@ server <- function(input, output) {
   output$value <- renderPrint({ input$somevalue })
 }
 shinyApp(ui, server)
+
+
+
