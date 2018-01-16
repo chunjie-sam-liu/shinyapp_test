@@ -1,9 +1,11 @@
 function(input, output, session) {
 
   # Create a random name for the log file
-  logfilename <- paste0('logfile',
-                        floor(runif(1, 1e+05, 1e+06 - 1)),
-                        '.txt')
+  logfilename <- paste0(
+    "logfile",
+    floor(runif(1, 1e+05, 1e+06 - 1)),
+    ".txt"
+  )
 
 
   # ============================================================
@@ -16,15 +18,18 @@ function(input, output, session) {
 
     # Clear log file if more than 10 entries
     if (file.exists(logfilename) &&
-        length(readLines(logfilename)) > 10) {
+      length(readLines(logfilename)) > 10) {
       unlink(logfilename)
     }
-
+    print(logfilename)
     # Add an entry to the log file
-    cat(as.character(Sys.time()), '\n', file = logfilename,
-        append = TRUE)
+    cat(
+      as.character(Sys.time()), "\n", file = logfilename,
+      append = TRUE
+    )
   })
-
+  
+  
   # When the client ends the session, suspend the observer and
   # remove the log file.
   session$onSessionEnded(function() {
@@ -35,8 +40,10 @@ function(input, output, session) {
   # ============================================================
   # This part of the code monitors the file for changes once per
   # 0.5 second (500 milliseconds).
-  fileReaderData <- reactiveFileReader(500, session,
-                                       logfilename, readLines)
+  fileReaderData <- reactiveFileReader(
+    500, session,
+    logfilename, readLines
+  )
 
   output$fileReaderText <- renderText({
     # Read the text, and make it a consistent number of lines so
@@ -44,7 +51,7 @@ function(input, output, session) {
     text <- fileReaderData()
     length(text) <- 14
     text[is.na(text)] <- ""
-    paste(text, collapse = '\n')
+    paste(text, collapse = "\n")
   })
 
 
@@ -52,14 +59,16 @@ function(input, output, session) {
   # This part of the code monitors the file for changes once
   # every four seconds.
 
-  pollData <- reactivePoll(4000, session,
+  pollData <- reactivePoll(
+    4000, session,
     # This function returns the time that the logfile was last
     # modified
     checkFunc = function() {
-      if (file.exists(logfilename))
+      if (file.exists(logfilename)) {
         file.info(logfilename)$mtime[1]
-      else
+      } else {
         ""
+      }
     },
     # This function returns the content of the logfile
     valueFunc = function() {
@@ -73,6 +82,6 @@ function(input, output, session) {
     text <- pollData()
     length(text) <- 14
     text[is.na(text)] <- ""
-    paste(text, collapse = '\n')
+    paste(text, collapse = "\n")
   })
 }
