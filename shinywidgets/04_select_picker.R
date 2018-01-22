@@ -51,7 +51,8 @@ ui <- fluidPage(
     inputId = "id", label = "Fruits :",
     choices = c("Banana", "Blueberry", "Cherry", "Coconut", "Grapefruit",
                 "Kiwi", "Lemon", "Lime", "Mango", "Orange", "Papaya"),
-    selected = NULL, width = "350px"
+    selected = NULL, width = "350px",
+    choiceNames = c("Selected", "unselected")
   ),
   switchInput(
     inputId = "up", label = "Analysis", value = FALSE,
