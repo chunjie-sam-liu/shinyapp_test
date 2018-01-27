@@ -33,7 +33,7 @@ shinyApp(
         # draw the histogram with the specified number of bins
         hist(x, breaks = bins, col = "darkgray", border = "white")
       })
-      addPopover(session, "distPlot", "Data", content = paste0(
+      addTooltip(session, "distPlot", "Data", title = paste0(
         "
                                                                Waiting time between ",
         "eruptions and the duration of the eruption for the Old Faithful geyser ",
@@ -44,6 +44,9 @@ shinyApp(
         "Applied Statistics 39, 357-365.
                                                                
                                                                "
-      ), trigger = "click")
+      ), trigger = "hover")
     }
 )
+
+
+
